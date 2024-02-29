@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Todo, TodoResponse, TodoStatus } from '@/types/Todo';
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { db, ROUTES } from '@/pages/lib/db';
+import { StatusCodes } from 'http-status-codes';
 
 export const handlePost = async (
   req: NextApiRequest,
   res: NextApiResponse<TodoResponse>,
-  api: AxiosInstance,
 ) => {
   try {
     const newTodo = {
@@ -15,10 +16,13 @@ export const handlePost = async (
       status: TodoStatus.TODO,
     };
 
-    const response: AxiosResponse<Todo> = await api.post('/todos', newTodo);
-    res.status(201).json({ data: response.data, error: '' });
+    const response: AxiosResponse<Todo> = await db.post(`${ROUTES.TODOS}`, newTodo);
+    res.status(StatusCodes.CREATED).json({ data: response.data, error: '' });
   } catch (error: unknown) {
     const axiosError = error as AxiosError;
-    res.status(500).json({ data: null, error: axiosError.message || 'Error adding todo' });
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      data: null,
+      error: axiosError.message || 'Error adding todo',
+    });
   }
 };

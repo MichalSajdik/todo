@@ -39,9 +39,33 @@ export const useTodos = () => {
     }
   };
 
+  const editTodo = async (id: string, description: string) => {
+    try {
+      await axios.patch(`/api/todos?id=${id}`, { description });
+      fetchTodos();
+
+    } catch (error) {
+      console.error('Error editing todo:', error);
+      setError('Error editing todo');
+    }
+  };
+
+  const deleteTodo = async (id: string) => {
+    try {
+      await axios.delete(`/api/todos?id=${id}`);
+
+      setTodos((prevState) => prevState.filter((todo) => todo.id !== id));
+      setError('');
+
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+      setError('Error deleting todo');
+    }
+  };
+
   useEffect(() => {
     fetchTodos();
   }, []);
 
-  return { todos, loading, error, handleAddTodo };
+  return { todos, loading, error, handleAddTodo, editTodo, deleteTodo };
 };

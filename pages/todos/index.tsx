@@ -5,11 +5,11 @@ import { useTodos } from '@/hooks/useTodos';
 
 const TodosPage = () => {
 
-  const { todos, handleAddTodo } = useTodos();
+  const { todos, handleAddTodo, editTodo, deleteTodo } = useTodos();
   return (
     <div>
       <h1>Todo List</h1>
-      <TodoList todos={todos}/>
+      <TodoList todos={todos} onEditTodo={editTodo} onDeleteTodo={deleteTodo}/>
       <AddTodoForm onAddTodo={handleAddTodo}/>
     </div>
   );

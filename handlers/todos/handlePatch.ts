@@ -8,7 +8,10 @@ export const handlePatch = async (
   res: NextApiResponse,
 ) => {
   try {
-    await db.patch(`${ROUTES.TODOS}/${req.query.id}`, { description: req.body.description });
+    await db.patch(`${ROUTES.TODOS}/${req.query.id}`, {
+      description: req.body.description,
+      lastModifiedAt: new Date(),
+    });
     res.status(StatusCodes.NO_CONTENT).end();
   } catch (error: unknown) {
     const axiosError = error as AxiosError;

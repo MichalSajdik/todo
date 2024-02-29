@@ -27,9 +27,11 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onEditTodo, onDeleteTodo }) 
     setEditedDescription('');
   };
 
+  const sortedTodos = todos.sort(sortBasedOnTime);
+  
   return (
     <ul className="space-y-2">
-      {todos.map((todo) => (
+      {sortedTodos.map((todo) => (
         <li key={todo.id} className={`p-4 border rounded-md ${editTodoId === todo.id ? 'bg-gray-100' : ''}`}>
           {editTodoId === todo.id ? (
             <>
@@ -73,6 +75,10 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onEditTodo, onDeleteTodo }) 
       ))}
     </ul>
   );
+};
+
+const sortBasedOnTime = (a: Todo, b: Todo) => {
+  return new Date(b.lastModifiedAt).getTime() - new Date(a.lastModifiedAt).getTime();
 };
 
 export default TodoList;

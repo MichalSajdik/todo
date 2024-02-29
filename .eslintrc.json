@@ -1,3 +1,50 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    // Use 2 spaces for indentation
+    "semi": [
+      "error",
+      "always"
+    ],
+    // Enforce using semicolons at the end of statements
+    "quotes": [
+      "error",
+      "single"
+    ],
+    // Enforce using single quotes
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    // Enforce trailing commas in multiline object literals
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    // Enforce spaces inside curly braces in object literals
+    "array-bracket-spacing": [
+      "error",
+      "always"
+    ],
+    // Enforce spaces inside square brackets in arrays
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    // Enforce spaces around arrow function arrows
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ]
+    // Enforce a maximum of 1 consecutive empty line
+  }
 }

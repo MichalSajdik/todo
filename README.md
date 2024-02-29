@@ -24,8 +24,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Mixed
 
     - add user authentication
-    - clean up code
-    - add tests
     - add CI/CD
     - add change status 
     - add husky

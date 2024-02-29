@@ -3,7 +3,7 @@ export interface Todo {
     description: string;
     createdAt: Date;
     lastModifiedAt: Date;
-    status: TodoStatus;
+    status: TODO_STATUS;
 }
 
 export interface TodosResponse {
@@ -16,7 +16,7 @@ export interface TodoResponse {
     error: string;
 }
 
-export enum TodoStatus {
+export enum TODO_STATUS {
     TODO = 'todo',
     IN_PROGRESS = 'in_progress',
     COMPLETED = 'completed',

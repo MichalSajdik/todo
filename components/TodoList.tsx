@@ -49,14 +49,14 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onEditTodo, onDeleteTodo }) 
               <TextField id="outlined-basic" variant="outlined"
                 style={{ display: 'inline-block', width: '100px' }} value={todo.id}
                 disabled={true}/>
-              <TextField id="outlined-basic" variant="outlined"
+              <TextField id="outlined-basic" variant="outlined" data-testid={`description2-${todo.id}`}
+                inputProps={{ 'data-testid': `description-${todo.id}` }}
                 style={{ display: 'inline-block', width: '400px' }}
                 fullWidth
                 value={isEdited ? editedDescription : todo.description}
-                disabled={!isEdited} onChange={(e) => {
-                  console.log(e.target.value);
+                disabled={!isEdited}
+                onChange={(e) => {
                   setEditedDescription(e.target.value);
-
                 }}/>
               <TextField id="outlined-basic" variant="outlined"
                 style={{ width: '200px', display: 'inline-block' }}
@@ -64,12 +64,12 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onEditTodo, onDeleteTodo }) 
                 disabled={true}/>
 
               {!isEdited && <>
-                <IconButton aria-label="edit"
+                <IconButton aria-label="edit" data-testid={`edit-${todo.id}`}
                   style={{ display: 'inline-block', height: '56px', width: '56px' }}
                   onClick={() => handleEditStart(todo.id, todo.description)}>
                   <ModeEditIcon/>
                 </IconButton>
-                <IconButton aria-label="delete"
+                <IconButton aria-label="delete" data-testid={`delete-${todo.id}`}
                   style={{ display: 'inline-block', height: '56px', width: '56px' }}
                   onClick={() => onDeleteTodo(todo.id)}>
                   <DeleteIcon/>
@@ -78,12 +78,12 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onEditTodo, onDeleteTodo }) 
               </>
               }
               {isEdited && <>
-                <IconButton aria-label="save"
+                <IconButton aria-label="save" data-testid={`save-${todo.id}`}
                   style={{ display: 'inline-block', height: '56px', width: '56px' }}
                   onClick={() => handleEditSave(todo.id)}>
                   <SaveIcon/>
                 </IconButton>
-                <IconButton aria-label="cancel"
+                <IconButton aria-label="cancel" data-testid={`cancel-${todo.id}`}
                   style={{ display: 'inline-block', height: '56px', width: '56px' }}
                   onClick={handleEditCancel}>
                   <CancelIcon/>

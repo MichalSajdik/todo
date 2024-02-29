@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Todo, TodoResponse, TodoStatus } from '@/types/Todo';
+import { Todo, TODO_STATUS, TodoResponse } from '@/types/Todo';
 import { AxiosError, AxiosResponse } from 'axios';
 import { db, ROUTES } from '@/pages/lib/db';
 import { StatusCodes } from 'http-status-codes';
@@ -13,7 +13,7 @@ export const handlePost = async (
       description: req.body.description,
       createdAt: new Date(),
       lastModifiedAt: new Date(),
-      status: TodoStatus.TODO,
+      status: TODO_STATUS.TODO,
     };
 
     const response: AxiosResponse<Todo> = await db.post(`${ROUTES.TODOS}`, newTodo);

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, TextField } from '@mui/material';
 
 interface AddTodoFormProps {
     onAddTodo: (description: string) => void;
@@ -16,8 +17,11 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAddTodo }) => {
 
   return (
     <div>
-      <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
-      <button onClick={handleAddTodo}>Add Todo</button>
+      <Button variant="outlined" onClick={handleAddTodo} style={{ height: '56px', width: '200px', float: 'left' }}>Add
+                TODO</Button>
+      <TextField id="outlined-basic" label="Todo description" variant="outlined"
+        onChange={(e) => setDescription(e.target.value)}
+        value={description} style={{ height: '56px', width: '600px' }}/>
     </div>
   );
 };

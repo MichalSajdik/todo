@@ -7,10 +7,12 @@ const TodosPage = () => {
 
   const { todos, handleAddTodo, editTodo, deleteTodo } = useTodos();
   return (
-    <div>
-      <h1>Todo List</h1>
-      <TodoList todos={todos} onEditTodo={editTodo} onDeleteTodo={deleteTodo}/>
-      <AddTodoForm onAddTodo={handleAddTodo}/>
+
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div>
+        <AddTodoForm onAddTodo={handleAddTodo}/>
+        <TodoList todos={todos} onEditTodo={editTodo} onDeleteTodo={deleteTodo}/>
+      </div>
     </div>
   );
 };

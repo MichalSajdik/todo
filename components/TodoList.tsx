@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { Todo } from '@/types/Todo';
+import { TextField } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import SaveIcon from '@mui/icons-material/Save';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { options } from '@/pages/lib/helpers';
 
 interface TodoListProps {
     todos: Todo[];
@@ -28,52 +35,69 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onEditTodo, onDeleteTodo }) 
   };
 
   const sortedTodos = todos.sort(sortBasedOnTime);
-  
+
   return (
-    <ul className="space-y-2">
-      {sortedTodos.map((todo) => (
-        <li key={todo.id} className={`p-4 border rounded-md ${editTodoId === todo.id ? 'bg-gray-100' : ''}`}>
-          {editTodoId === todo.id ? (
+    <div>
+      {sortedTodos.map((todo) => {
+        const isEdited = todo.id === editTodoId;
+        const date = Intl.DateTimeFormat('cs-CZ', options).format(new Date(todo.lastModifiedAt));
+
+        return (
+
+          <div key={todo.id}>
             <>
-              <input
-                type="text"
-                value={editedDescription}
-                onChange={(e) => setEditedDescription(e.target.value)}
-                className="border p-1 w-full"
-              />
-              <button
-                onClick={() => handleEditSave(todo.id)}
-                className="bg-green-500 text-white px-2 py-1 ml-2 rounded"
-              >
-                                Save
-              </button>
-              <button
-                onClick={handleEditCancel}
-                className="bg-gray-500 text-white px-2 py-1 ml-2 rounded"
-              >
-                                Cancel
-              </button>
+              <TextField id="outlined-basic" variant="outlined"
+                style={{ display: 'inline-block', width: '100px' }} value={todo.id}
+                disabled={true}/>
+              <TextField id="outlined-basic" variant="outlined"
+                style={{ display: 'inline-block', width: '400px' }}
+                fullWidth
+                value={isEdited ? editedDescription : todo.description}
+                disabled={!isEdited} onChange={(e) => {
+                  console.log(e.target.value);
+                  setEditedDescription(e.target.value);
+
+                }}/>
+              <TextField id="outlined-basic" variant="outlined"
+                style={{ width: '200px', display: 'inline-block' }}
+                value={date}
+                disabled={true}/>
+
+              {!isEdited && <>
+                <IconButton aria-label="edit"
+                  style={{ display: 'inline-block', height: '56px', width: '56px' }}
+                  onClick={() => handleEditStart(todo.id, todo.description)}>
+                  <ModeEditIcon/>
+                </IconButton>
+                <IconButton aria-label="delete"
+                  style={{ display: 'inline-block', height: '56px', width: '56px' }}
+                  onClick={() => onDeleteTodo(todo.id)}>
+                  <DeleteIcon/>
+                </IconButton>
+
+              </>
+              }
+              {isEdited && <>
+                <IconButton aria-label="save"
+                  style={{ display: 'inline-block', height: '56px', width: '56px' }}
+                  onClick={() => handleEditSave(todo.id)}>
+                  <SaveIcon/>
+                </IconButton>
+                <IconButton aria-label="cancel"
+                  style={{ display: 'inline-block', height: '56px', width: '56px' }}
+                  onClick={handleEditCancel}>
+                  <CancelIcon/>
+                </IconButton>
+              </>
+              }
+
             </>
-          ) : (
-            <>
-              <span className="mr-2">{todo.description}</span>
-              <button
-                onClick={() => handleEditStart(todo.id, todo.description)}
-                className="bg-blue-500 text-white px-2 py-1 rounded"
-              >
-                                Edit
-              </button>
-              <button
-                onClick={() => onDeleteTodo(todo.id)}
-                className="bg-red-500 text-white px-2 py-1 ml-2 rounded"
-              >
-                                Delete
-              </button>
-            </>
-          )}
-        </li>
-      ))}
-    </ul>
+          </div>
+        );
+
+      }
+      )}
+    </div>
   );
 };
 

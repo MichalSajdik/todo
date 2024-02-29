@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Todo, TodosResponse } from '@/types/Todo';
+import { Todo } from '@/types/Todo';
 import axios from 'axios';
 
 export const useTodos = () => {
@@ -9,10 +9,9 @@ export const useTodos = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await fetch('/api/todos');
-      const todosResponse: TodosResponse = await response.json();
-      setTodos(todosResponse.data);
-      setError(todosResponse.error);
+      const { data: response } = await axios.get('/api/todos');
+      setTodos(response.data);
+      setError(response.error);
     } catch (error) {
       console.error('Error fetching todos:', error);
       setError('Error fetching todos');
@@ -23,10 +22,10 @@ export const useTodos = () => {
 
   const handleAddTodo = async (description: string) => {
     try {
-      const response = await axios.post('/api/todos', { description });
+      const { data: response } = await axios.post('/api/todos', { description });
 
-      if (response.data === null) {
-        console.error('Failed to add todo - response data is null');
+      if (!response.data) {
+        console.error('Failed to add todo - response data is incorrect: ', response.data);
         setError('Failed to add todo');
         return;
       }

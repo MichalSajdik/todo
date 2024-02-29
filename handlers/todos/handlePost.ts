@@ -15,7 +15,7 @@ export const handlePost = async (
       status: TodoStatus.TODO,
     };
 
-    const response: AxiosResponse<Todo> = await api.post('/todos', req.body);
+    const response: AxiosResponse<Todo> = await api.post('/todos', newTodo);
     res.status(201).json({ data: response.data, error: '' });
   } catch (error: unknown) {
     const axiosError = error as AxiosError;

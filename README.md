@@ -20,6 +20,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### BE
 
     - add logger for BE
+    - get `todo-your-secret-key` from env variables of pipeline
 
 ### Mixed
 
@@ -27,3 +28,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
     - add CI/CD
     - add change status 
     - add husky
+    - add E2E-tests(preferably playwright)

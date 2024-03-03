@@ -11,7 +11,7 @@
       "id": "3804",
       "description": "Test Description 1",
       "createdAt": "2024-03-03T20:53:40.780Z",
-      "lastModifiedAt": "2024-03-03T20:53:40.780Z",
+      "lastModifiedAt": "2024-03-03T21:22:26.559Z",
       "status": "todo",
       "userId": "1765"
     },
@@ -19,8 +19,8 @@
       "id": "8d9b",
       "description": "Test Description 2",
       "createdAt": "2024-03-03T20:53:46.455Z",
-      "lastModifiedAt": "2024-03-03T20:53:46.455Z",
-      "status": "todo",
+      "lastModifiedAt": "2024-03-03T21:24:59.250Z",
+      "status": "in_progress",
       "userId": "1765"
     }
   ]

@@ -16,6 +16,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
     - add translations
     - add page usage data service for FE, for example mixPanel
     - add notification service, for displaying notifications (errors, warnings, info)
+    - add responsive design (mobile)
 
 ### BE
 

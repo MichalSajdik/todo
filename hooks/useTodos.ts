@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Todo } from '@/types/Todo';
+import { Todo, TODO_STATUS } from '@/types/Todo';
 import api from '@/pages/lib/api';
 import { ROUTES } from '@/pages/lib/helpers';
 
@@ -40,9 +40,9 @@ export const useTodos = () => {
     }
   };
 
-  const editTodo = async (id: string, description: string) => {
+  const editTodo = async (id: string, description: string, status: TODO_STATUS) => {
     try {
-      await api.patch(`${ROUTES.TODOS}?id=${id}`, { description });
+      await api.patch(`${ROUTES.TODOS}?id=${id}`, { description, status });
       fetchTodos();
 
     } catch (error) {

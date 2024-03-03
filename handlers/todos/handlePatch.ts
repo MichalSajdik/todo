@@ -11,6 +11,7 @@ export const handlePatch = async (
   try {
     await db.patch(`${DB_ROUTES.TODOS}/${req.query.id}?userId=${userId}`, {
       description: req.body.description,
+      status: req.body.status,
       lastModifiedAt: new Date(),
     });
     res.status(StatusCodes.NO_CONTENT).end();

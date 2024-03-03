@@ -21,7 +21,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAddTodo }) => {
                 TODO</Button>
       <TextField id="outlined-basic" label="Todo description" variant="outlined"
         onChange={(e) => setDescription(e.target.value)}
-        value={description} style={{ height: '56px', width: '600px' }}/>
+        value={description} style={{ height: '56px', width: '640px' }}/>
     </div>
   );
 };

@@ -58,7 +58,7 @@ describe('TodoList', () => {
 
     expect(descriptionTextField).toHaveValue('Todo 1');
     expect(onEditTodoMock).toHaveBeenCalledTimes(1);
-    expect(onEditTodoMock).toHaveBeenCalledWith('1', 'Updated Task 1');
+    expect(onEditTodoMock).toHaveBeenCalledWith('1', 'Updated Task 1', TODO_STATUS.TODO);
   });
 
   it('calls onDeleteTodo when delete button is clicked', () => {

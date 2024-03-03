@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { handlePost } from '@/handlers/todos/handlePost';
-import { db } from '@/pages/lib/db';
+import { db, DB_ROUTES } from '@/pages/lib/db';
 import { StatusCodes } from 'http-status-codes';
 import { TODO_STATUS } from '@/types/Todo';
 
@@ -30,13 +30,14 @@ describe('handlePost', () => {
     const successfulResponse = { data: { id: '1', description: 'New Todo' } };
     (db.post as jest.Mock).mockResolvedValue(successfulResponse);
 
-    await handlePost(mockReq as NextApiRequest, mockRes as NextApiResponse);
+    await handlePost(mockReq as NextApiRequest, mockRes as NextApiResponse, '1');
 
-    expect(db.post).toHaveBeenCalledWith('/todos', {
+    expect(db.post).toHaveBeenCalledWith(DB_ROUTES.TODOS, {
       description: 'New Todo',
       createdAt: expect.any(Date),
       lastModifiedAt: expect.any(Date),
       status: TODO_STATUS.TODO,
+      userId: '1',
     });
     expect(mockRes.status).toHaveBeenCalledWith(StatusCodes.CREATED);
     expect(mockRes.json).toHaveBeenCalledWith({
@@ -49,13 +50,14 @@ describe('handlePost', () => {
     const error = new Error('Mocked post error');
     (db.post as jest.Mock).mockRejectedValue(error);
 
-    await handlePost(mockReq as NextApiRequest, mockRes as NextApiResponse);
+    await handlePost(mockReq as NextApiRequest, mockRes as NextApiResponse, '1');
 
-    expect(db.post).toHaveBeenCalledWith('/todos', {
+    expect(db.post).toHaveBeenCalledWith(DB_ROUTES.TODOS, {
       description: 'New Todo',
       createdAt: expect.any(Date),
       lastModifiedAt: expect.any(Date),
       status: TODO_STATUS.TODO,
+      userId: '1',
     });
     expect(mockRes.status).toHaveBeenCalledWith(StatusCodes.INTERNAL_SERVER_ERROR);
     expect(mockRes.json).toHaveBeenCalledWith({

@@ -1,9 +1,9 @@
 import { act, renderHook } from '@testing-library/react';
-import axios from 'axios';
 import { useTodos } from '@/hooks/useTodos';
 import { Todo } from '@/types/Todo';
+import api from '@/pages/lib/api';
 
-jest.mock('axios');
+jest.mock('@/pages/lib/api');
 
 describe('useTodos', () => {
   afterEach(() => {
@@ -15,7 +15,7 @@ describe('useTodos', () => {
       { id: '1', description: 'Todo 1' },
       { id: '2', description: 'Todo 2' },
     ];
-    (axios.get as jest.Mock).mockResolvedValue({ data: { data: mockTodos, error: '' } });
+    (api.get as jest.Mock).mockResolvedValue({ data: { data: mockTodos, error: '' } });
 
     const { result } = renderHook(() => useTodos());
 
@@ -32,7 +32,7 @@ describe('useTodos', () => {
 
   it('handles fetch error', async () => {
     const errorMessage = 'Error fetching todos';
-    (axios.get as jest.Mock).mockRejectedValue(new Error(errorMessage));
+    (api.get as jest.Mock).mockRejectedValue(new Error(errorMessage));
 
     const { result } = renderHook(() => useTodos());
 
@@ -49,10 +49,10 @@ describe('useTodos', () => {
 
   it('handles addTodo successfully', async () => {
     const mockTodos: Todo[] = [];
-    (axios.get as jest.Mock).mockResolvedValue({ data: { data: mockTodos, error: '' } });
+    (api.get as jest.Mock).mockResolvedValue({ data: { data: mockTodos, error: '' } });
 
     const mockTodo = { data: { id: '3', description: 'New Todo' } };
-    (axios.post as jest.Mock).mockResolvedValue({ data: mockTodo });
+    (api.post as jest.Mock).mockResolvedValue({ data: mockTodo });
 
     const { result } = renderHook(() => useTodos());
 
@@ -68,7 +68,7 @@ describe('useTodos', () => {
 
   it('handles addTodo error', async () => {
     const errorMessage = 'Error adding todo';
-    (axios.post as jest.Mock).mockRejectedValue(new Error(errorMessage));
+    (api.post as jest.Mock).mockRejectedValue(new Error(errorMessage));
 
     const { result } = renderHook(() => useTodos());
 
@@ -83,11 +83,11 @@ describe('useTodos', () => {
     const mockTodos = [
       { id: '1', description: 'Todo 1' },
     ];
-    (axios.get as jest.Mock).mockResolvedValue({ data: { data: mockTodos, error: '' } });
+    (api.get as jest.Mock).mockResolvedValue({ data: { data: mockTodos, error: '' } });
 
     const mockTodoId = '1';
     const mockTodo = { id: mockTodoId, description: 'Todo 1' };
-    (axios.patch as jest.Mock).mockResolvedValue({ description: 'Updated Todo' });
+    (api.patch as jest.Mock).mockResolvedValue({ description: 'Updated Todo' });
 
     const { result } = renderHook(() => useTodos());
 
@@ -103,9 +103,7 @@ describe('useTodos', () => {
 
   it('handles deleteTodo successfully', async () => {
     const mockTodos = [ { id: '1', description: 'Todo 1' } ];
-    (axios.get as jest.Mock).mockResolvedValue({ data: { data: mockTodos, error: '' } });
-
-    const mockTodo = { data: [] };
+    (api.get as jest.Mock).mockResolvedValue({ data: { data: mockTodos, error: '' } });
 
     const { result } = renderHook(() => useTodos());
 

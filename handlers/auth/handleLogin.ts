@@ -2,9 +2,10 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { AuthResponse, User } from '@/types/Auth';
-import { db } from '@/pages/lib/db';
+import { db, DB_ROUTES } from '@/pages/lib/db';
 import { AxiosResponse } from 'axios';
 import { StatusCodes } from 'http-status-codes';
+import { secretKey } from '@/pages/lib/helpers';
 
 export const handleLogin = async (
   req: NextApiRequest,
@@ -14,7 +15,7 @@ export const handleLogin = async (
     const { username, password } = req.body;
 
     // Find the user by username
-    const users: AxiosResponse<User[]> = await db.get('/users', {
+    const users: AxiosResponse<User[]> = await db.get(DB_ROUTES.USERS, {
       params: { username },
     });
 
@@ -25,7 +26,7 @@ export const handleLogin = async (
 
     if (users.data.length > 1) {
       console.error('Multiple users found');
-      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ token: '', error: 'Internal server error' });
+      return res.status(StatusCodes.CONFLICT).json({ token: '', error: 'Multiple usernames' });
     }
 
     const user = users.data[0];
@@ -36,8 +37,12 @@ export const handleLogin = async (
       return res.status(StatusCodes.UNAUTHORIZED).json({ token: '', error: 'Invalid credentials' });
     }
 
+    if (!secretKey) {
+      throw new Error('Secret key is not available');
+    }
+
     // Generate a JWT token
-    const token = jwt.sign({ userId: user.id, username: user.username }, 'todo-your-secret-key', {
+    const token = jwt.sign({ userId: user.id, username: user.username }, secretKey, {
       expiresIn: '1h',
     });
 

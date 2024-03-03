@@ -4,6 +4,7 @@ export interface Todo {
     createdAt: Date;
     lastModifiedAt: Date;
     status: TODO_STATUS;
+    user_id: string;
 }
 
 export interface TodosResponse {

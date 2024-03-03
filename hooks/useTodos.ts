@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Todo } from '@/types/Todo';
-import axios from 'axios';
+import api from '@/pages/lib/api';
+import { ROUTES } from '@/pages/lib/helpers';
 
 export const useTodos = () => {
   const [ todos, setTodos ] = useState<Todo[]>([]);
@@ -9,7 +10,7 @@ export const useTodos = () => {
 
   const fetchTodos = async () => {
     try {
-      const { data: response } = await axios.get('/api/todos');
+      const { data: response } = await api.get(ROUTES.TODOS);
       setTodos(response.data);
       setError(response.error);
     } catch (error) {
@@ -20,9 +21,9 @@ export const useTodos = () => {
     }
   };
 
-  const handleAddTodo = async (description: string) => {
+  const addTodo = async (description: string) => {
     try {
-      const { data: response } = await axios.post('/api/todos', { description });
+      const { data: response } = await api.post(ROUTES.TODOS, { description });
 
       if (!response.data) {
         console.error('Failed to add todo - response data is incorrect: ', response.data);
@@ -41,7 +42,7 @@ export const useTodos = () => {
 
   const editTodo = async (id: string, description: string) => {
     try {
-      await axios.patch(`/api/todos?id=${id}`, { description });
+      await api.patch(`${ROUTES.TODOS}?id=${id}`, { description });
       fetchTodos();
 
     } catch (error) {
@@ -52,7 +53,7 @@ export const useTodos = () => {
 
   const deleteTodo = async (id: string) => {
     try {
-      await axios.delete(`/api/todos?id=${id}`);
+      await api.delete(`${ROUTES.TODOS}?id=${id}`);
 
       setTodos((prevState) => prevState.filter((todo) => todo.id !== id));
       setError('');
@@ -67,5 +68,5 @@ export const useTodos = () => {
     fetchTodos();
   }, []);
 
-  return { todos, loading, error, handleAddTodo, editTodo, deleteTodo };
+  return { todos, loading, error, handleAddTodo: addTodo, editTodo, deleteTodo };
 };

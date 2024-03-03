@@ -20,11 +20,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### BE
 
     - add logger for BE
-    - get `todo-your-secret-key` from env variables of pipeline
+    - verify that User still exists for all requests (when user is deleted, but token is still valid, the user can still create todos)
 
 ### Mixed
 
-    - add user authentication
     - add CI/CD
     - add change status 
     - add husky

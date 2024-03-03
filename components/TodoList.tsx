@@ -37,7 +37,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onEditTodo, onDeleteTodo }) 
   const sortedTodos = todos.sort(sortBasedOnTime);
 
   return (
-    <div>
+    <div data-testid="todo-list">
       {sortedTodos.map((todo) => {
         const isEdited = todo.id === editTodoId;
         const date = Intl.DateTimeFormat('cs-CZ', options).format(new Date(todo.lastModifiedAt));

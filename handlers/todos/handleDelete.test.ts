@@ -2,7 +2,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import { handleDelete } from '@/handlers/todos/handleDelete';
-import { db } from '@/pages/lib/db';
+import { db, DB_ROUTES } from '@/pages/lib/db';
 
 jest.mock('@/pages/lib/db', () => {
   const originalDb = jest.requireActual('@/pages/lib/db');
@@ -31,18 +31,18 @@ describe('handleDelete', () => {
 
   it('handles delete request successfully', async () => {
 
-    await handleDelete(mockReq as NextApiRequest, mockRes as NextApiResponse);
+    await handleDelete(mockReq as NextApiRequest, mockRes as NextApiResponse, '1');
 
-    expect(db.delete).toHaveBeenCalledWith('/todos/1');
+    expect(db.delete).toHaveBeenCalledWith(`${DB_ROUTES.TODOS}/1?userId=1`);
     expect(mockRes.status).toHaveBeenCalledWith(StatusCodes.OK);
 
   });
 
   it('handles delete request with error', async () => {
     (db.delete as jest.Mock).mockRejectedValue(new Error('error'));
-    await handleDelete(mockReq as NextApiRequest, mockRes as NextApiResponse);
+    await handleDelete(mockReq as NextApiRequest, mockRes as NextApiResponse, '1');
 
-    expect(db.delete).toHaveBeenCalledWith('/todos/1');
+    expect(db.delete).toHaveBeenCalledWith(`${DB_ROUTES.TODOS}/1?userId=1`);
     expect(mockRes.status).toHaveBeenCalledWith(StatusCodes.INTERNAL_SERVER_ERROR);
 
   });

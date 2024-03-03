@@ -1,14 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { AxiosError } from 'axios';
-import { db, ROUTES } from '@/pages/lib/db';
+import { db, DB_ROUTES } from '@/pages/lib/db';
 import { StatusCodes } from 'http-status-codes';
 
 export const handlePatch = async (
   req: NextApiRequest,
   res: NextApiResponse,
+  userId: string
 ) => {
   try {
-    await db.patch(`${ROUTES.TODOS}/${req.query.id}`, {
+    await db.patch(`${DB_ROUTES.TODOS}/${req.query.id}?userId=${userId}`, {
       description: req.body.description,
       lastModifiedAt: new Date(),
     });

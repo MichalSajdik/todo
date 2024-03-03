@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { ROUTES } from '@/pages/lib/helpers';
 
 const Login = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const Login = () => {
 
       localStorage.setItem('token', token);
 
-      router.push('/todos');
+      router.push(ROUTES.TODOS);
     } catch (error) {
       console.error('Error during login:', error);
       setError('Invalid credentials');
@@ -25,21 +26,28 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Login</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {error && <span>{error}</span>}
-      <button onClick={handleLogin}>Login</button>
+      <div>
+        <h2>Login</h2>
+        <input
+          data-testid='username-input'
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          data-testid='password-input'
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={handleLogin} data-testid='login-button'>Login</button>
+      </div>
+      {error && <div><span>{error}</span></div>}
+      <div>
+        <a href={ROUTES.REGISTER}>Register</a>
+      </div>
     </div>
   );
 };

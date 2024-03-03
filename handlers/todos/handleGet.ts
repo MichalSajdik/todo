@@ -1,14 +1,15 @@
 import { NextApiResponse } from 'next';
 import { Todo, TodosResponse } from '@/types/Todo';
 import { AxiosError, AxiosResponse } from 'axios';
-import { db, ROUTES } from '@/pages/lib/db';
+import { db, DB_ROUTES } from '@/pages/lib/db';
 import { StatusCodes } from 'http-status-codes';
 
 export const handleGet = async (
   res: NextApiResponse<TodosResponse>,
+  userId: string
 ) => {
   try {
-    const response: AxiosResponse<Todo[]> = await db.get(`${ROUTES.TODOS}`);
+    const response: AxiosResponse<Todo[]> = await db.get(`${DB_ROUTES.TODOS}?userId=${userId}`);
 
     res.status(StatusCodes.OK).json({ data: response.data, error: '' });
 

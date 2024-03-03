@@ -4,6 +4,7 @@ export const db: AxiosInstance = axios.create({
   baseURL: 'http://localhost:3001',
 });
 
-export const ROUTES = {
+export const DB_ROUTES = {
   TODOS: '/todos',
+  USERS: '/users',
 };

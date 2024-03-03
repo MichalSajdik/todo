@@ -12,6 +12,7 @@ describe('TodoList', () => {
       lastModifiedAt: new Date(),
       status: TODO_STATUS.TODO,
       createdAt: new Date(),
+      user_id: '1',
     },
     {
       id: '2',
@@ -19,6 +20,7 @@ describe('TodoList', () => {
       lastModifiedAt: new Date(),
       status: TODO_STATUS.TODO,
       createdAt: new Date(),
+      user_id: '1',
     },
   ];
 

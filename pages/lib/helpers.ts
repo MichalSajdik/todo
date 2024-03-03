@@ -6,3 +6,11 @@ export const options: Intl.DateTimeFormatOptions = {
   minute: 'numeric',
   second: 'numeric',
 };
+
+export const secretKey = process.env.JWT_SECRET_KEY;
+
+export const ROUTES = {
+  TODOS: '/todos',
+  REGISTER: '/register',
+  LOGIN: '/login',
+};

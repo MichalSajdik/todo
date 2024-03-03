@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { handlePatch } from '@/handlers/todos/handlePatch';
-import { db } from '@/pages/lib/db';
+import { db, DB_ROUTES } from '@/pages/lib/db';
 import { StatusCodes } from 'http-status-codes';
 
 jest.mock('@/pages/lib/db', () => {
@@ -27,9 +27,9 @@ describe('handlePatch', () => {
   it('handles patch request successfully', async () => {
     (db.patch as jest.Mock).mockResolvedValue({});
 
-    await handlePatch(mockReq as NextApiRequest, mockRes as NextApiResponse);
+    await handlePatch(mockReq as NextApiRequest, mockRes as NextApiResponse, '1');
 
-    expect(db.patch).toHaveBeenCalledWith('/todos/1', {
+    expect(db.patch).toHaveBeenCalledWith(`${DB_ROUTES.TODOS}/1?userId=1`, {
       description: 'Updated Todo',
       lastModifiedAt: expect.any(Date),
     });
@@ -41,9 +41,9 @@ describe('handlePatch', () => {
     const error = new Error('Mocked patch error');
     (db.patch as jest.Mock).mockRejectedValue(error);
 
-    await handlePatch(mockReq as NextApiRequest, mockRes as NextApiResponse);
+    await handlePatch(mockReq as NextApiRequest, mockRes as NextApiResponse, '1');
 
-    expect(db.patch).toHaveBeenCalledWith('/todos/1', {
+    expect(db.patch).toHaveBeenCalledWith(`${DB_ROUTES.TODOS}/1?userId=1`, {
       description: 'Updated Todo',
       lastModifiedAt: expect.any(Date),
     });

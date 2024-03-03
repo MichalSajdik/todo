@@ -1,51 +1,27 @@
 {
   "users": [
     {
-      "id": "f88b",
-      "username": "111",
-      "password": "$2b$10$P6LTJKDKnjQS4yoG6r0IduomeWZ/Y1TNnXmiCYWA2vHqPMZJ1jD/2"
-    },
-    {
-      "id": "3800",
-      "username": "a",
-      "password": "$2b$10$4Pz1Zv9oZLbkVr2.2rpwXuVaQpf.IlRI./MryOdYQ/EBamry8GPLi"
+      "id": "f5e5",
+      "username": "asd",
+      "password": "$2b$10$Lff5fsSAxSvJliEWBgNMTeIP/D8yh7g0h/MilNIlcDXn6OhjS2FKq"
     }
   ],
   "todos": [
     {
-      "id": "bfe6",
-      "description": "123333444422",
-      "createdAt": "2024-02-29T16:01:46.812Z",
-      "lastModifiedAt": "2024-02-29T16:01:46.812Z",
-      "status": "todo"
+      "id": "1700",
+      "description": "sadsads2",
+      "createdAt": "2024-03-03T20:46:42.189Z",
+      "lastModifiedAt": "2024-03-03T20:46:55.224Z",
+      "status": "todo",
+      "userId": "f5e5"
     },
     {
-      "id": "a5a5",
-      "description": "34444442",
-      "createdAt": "2024-02-29T16:04:09.535Z",
-      "lastModifiedAt": "2024-02-29T16:04:09.535Z",
-      "status": "todo"
-    },
-    {
-      "id": "d683",
-      "description": "ss",
-      "createdAt": "2024-02-29T16:12:13.595Z",
-      "lastModifiedAt": "2024-02-29T16:12:13.595Z",
-      "status": "todo"
-    },
-    {
-      "id": "69ac",
-      "description": "ssssss2",
-      "createdAt": "2024-02-29T16:12:56.231Z",
-      "lastModifiedAt": "2024-02-29T17:01:03.805Z",
-      "status": "todo"
-    },
-    {
-      "id": "f4fd",
-      "description": "123",
-      "createdAt": "2024-02-29T19:21:19.506Z",
-      "lastModifiedAt": "2024-02-29T19:21:19.506Z",
-      "status": "todo"
+      "id": "a7ac",
+      "description": "sad",
+      "createdAt": "2024-03-03T20:46:46.911Z",
+      "lastModifiedAt": "2024-03-03T20:46:46.911Z",
+      "status": "todo",
+      "userId": "f5e5"
     }
   ]
 }

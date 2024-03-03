@@ -5,7 +5,15 @@ import { useTodos } from '@/hooks/useTodos';
 
 const TodosPage = () => {
 
-  const { todos, handleAddTodo, editTodo, deleteTodo } = useTodos();
+  const { todos, loading, error, handleAddTodo, editTodo, deleteTodo } = useTodos();
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
 
     <div style={{ display: 'flex', justifyContent: 'center' }}>

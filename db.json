@@ -1,27 +1,27 @@
 {
   "users": [
     {
-      "id": "f5e5",
-      "username": "asd",
-      "password": "$2b$10$Lff5fsSAxSvJliEWBgNMTeIP/D8yh7g0h/MilNIlcDXn6OhjS2FKq"
+      "id": "1765",
+      "username": "TestUser1",
+      "password": "$2b$10$toiIqXoFUpKdfcUkq7BBsu4Wfcb.kAPy6tRm8jyKO5wyj1aNJf1kS"
     }
   ],
   "todos": [
     {
-      "id": "1700",
-      "description": "sadsads2",
-      "createdAt": "2024-03-03T20:46:42.189Z",
-      "lastModifiedAt": "2024-03-03T20:46:55.224Z",
+      "id": "3804",
+      "description": "Test Description 1",
+      "createdAt": "2024-03-03T20:53:40.780Z",
+      "lastModifiedAt": "2024-03-03T20:53:40.780Z",
       "status": "todo",
-      "userId": "f5e5"
+      "userId": "1765"
     },
     {
-      "id": "a7ac",
-      "description": "sad",
-      "createdAt": "2024-03-03T20:46:46.911Z",
-      "lastModifiedAt": "2024-03-03T20:46:46.911Z",
+      "id": "8d9b",
+      "description": "Test Description 2",
+      "createdAt": "2024-03-03T20:53:46.455Z",
+      "lastModifiedAt": "2024-03-03T20:53:46.455Z",
       "status": "todo",
-      "userId": "f5e5"
+      "userId": "1765"
     }
   ]
 }
